@@ -10,7 +10,9 @@ dist/
 *.egg-info/
 
 # Local application data
-data/*.db
-data/*.db-*
-data/*.sqlite
-data/*.sqlite-*
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*

@@ -6,21 +6,23 @@ import pandas as pd
 import streamlit as st
 
 from smartspend.config import load_settings
+from smartspend.db.schema import initialize_database
 from smartspend.demo_data import DEMO_TRANSACTIONS
 
 st.set_page_config(page_title="SmartSpend", page_icon="💸", layout="wide")
 
 settings = load_settings()
+database_path = initialize_database(settings.database_path)
 
 st.sidebar.title("SmartSpend")
 st.sidebar.caption("Personal finance, made clearer.")
-st.sidebar.caption(f"Local data directory: {settings.data_dir}")
+st.sidebar.caption(f"SQLite database: {database_path}")
 
 st.title("SmartSpend")
 st.caption("Smart Expense Tracker & Financial Analytics System")
 st.info(
-    "Project foundation is ready. This preview contains synthetic demo data only; "
-    "transaction storage and financial summaries will be added in upcoming phases."
+    "The local SQLite database is initialized. This preview shows synthetic demo data only; "
+    "dashboard calculations and the transaction-management interface are upcoming."
 )
 
 st.subheader("Sample transaction data")

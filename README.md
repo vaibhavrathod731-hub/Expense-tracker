@@ -1,9 +1,10 @@
 # SmartSpend
 
 SmartSpend is a local, single-user expense tracker and financial analytics
-application built with Python and Streamlit. The initial project foundation
-includes application configuration, synthetic demo transactions, and automated
-tests. It does not yet persist transactions or provide financial calculations.
+application built with Python and Streamlit. The project includes application
+configuration, an initialized SQLite database, parameterized CRUD repositories,
+synthetic demo transactions, and automated tests. Financial calculations and
+the full transaction-management interface are planned for later phases.
 
 ## Requirements
 
@@ -36,13 +37,30 @@ python -m pytest
 ```
 
 The application currently shows synthetic transactions as a visual preview.
-These records are not persisted or mixed with future user-entered transactions.
+They are not automatically inserted into the database or mixed with user data.
+On startup, the app initializes the local schema and default categories.
 
 ## Configuration and local data
 
-By default, future application data will be stored in a `data` directory under
-the current working directory. Set `SMARTSPEND_DATA_DIR` to use another local
-directory. SQLite database files in `data` are excluded from Git.
+By default, the SQLite database is stored at
+`data/smartspend.sqlite3` under the current working directory. Set
+`SMARTSPEND_DATA_DIR` to use another local directory. SQLite database files are
+excluded from Git; do not force-add databases containing personal financial
+data.
+
+Initialize the schema and default categories from Python:
+
+```python
+from smartspend.db import initialize_database, open_connection
+from smartspend.repositories.categories import list_categories
+
+database_path = initialize_database()
+with open_connection(database_path) as connection:
+    categories = list_categories(connection)
+```
+
+Repository monetary amounts use integer paise (`100 paise = ₹1`). Default
+categories are seeded idempotently; demo transactions are not imported.
 
 ## Project layout
 
@@ -51,14 +69,16 @@ app.py                      Streamlit application entry point
 src/smartspend/             Installable Python package
   config.py                 Local application settings and data paths
   demo_data.py              Synthetic records for demos and tests
+  db/                       SQLite connections, schema, errors, and records
+  repositories/             Parameterized CRUD operations
 tests/                      Pytest fixtures and automated tests
 pyproject.toml              Package metadata, dependencies, and tool settings
 ```
 
 ## Development roadmap
 
-1. Establish the project foundation, configuration, and test setup.
-2. Add the SQLite schema, initialization, and repository layer.
+1. Establish the project foundation, configuration, and test setup. (Complete)
+2. Add the SQLite schema, initialization, and repository layer. (Complete)
 3. Implement transaction management and validation.
 4. Build dashboard summaries and budget management.
 5. Add analytics, forecasting, and downloadable reports.

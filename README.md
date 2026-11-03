@@ -3,8 +3,8 @@
 SmartSpend is a local, single-user expense tracker and financial analytics
 application built with Python and Streamlit. The project includes application
 configuration, an initialized SQLite database, parameterized CRUD repositories,
-synthetic demo transactions, and automated tests. Financial calculations and
-the full transaction-management interface are planned for later phases.
+synthetic demo transactions, transaction management, and automated tests.
+Dashboard calculations and financial analytics are planned for later phases.
 
 ## Requirements
 
@@ -36,9 +36,10 @@ streamlit run app.py
 python -m pytest
 ```
 
-The application currently shows synthetic transactions as a visual preview.
-They are not automatically inserted into the database or mixed with user data.
-On startup, the app initializes the local schema and default categories.
+The Dashboard shows synthetic transactions as a visual preview; these records
+are not automatically inserted into or mixed with user data. Use the Transactions
+navigation item to add, filter, edit, and delete persisted transactions. On
+startup, the app initializes the local schema and default categories.
 
 ## Configuration and local data
 
@@ -71,6 +72,8 @@ src/smartspend/             Installable Python package
   demo_data.py              Synthetic records for demos and tests
   db/                       SQLite connections, schema, errors, and records
   repositories/             Parameterized CRUD operations
+  services/                 Transaction validation and business rules
+  ui/                       Streamlit transaction-management interface
 tests/                      Pytest fixtures and automated tests
 pyproject.toml              Package metadata, dependencies, and tool settings
 ```
@@ -79,7 +82,7 @@ pyproject.toml              Package metadata, dependencies, and tool settings
 
 1. Establish the project foundation, configuration, and test setup. (Complete)
 2. Add the SQLite schema, initialization, and repository layer. (Complete)
-3. Implement transaction management and validation.
+3. Implement transaction management and validation. (Complete)
 4. Build dashboard summaries and budget management.
 5. Add analytics, forecasting, and downloadable reports.
 6. Polish the interface, documentation, and test coverage.

@@ -4,7 +4,8 @@ SmartSpend is a local, single-user expense tracker and financial analytics
 application built with Python and Streamlit. The project includes application
 configuration, an initialized SQLite database, parameterized CRUD repositories,
 synthetic demo transactions, transaction management, and automated tests.
-Dashboard calculations and financial analytics are planned for later phases.
+The Dashboard displays filtered summaries, category insights, monthly comparisons,
+and interactive charts based on persisted transactions.
 
 ## Requirements
 
@@ -36,9 +37,15 @@ streamlit run app.py
 python -m pytest
 ```
 
-The Dashboard shows synthetic transactions as a visual preview; these records
-are not automatically inserted into or mixed with user data. Use the Transactions
-navigation item to add, filter, edit, and delete persisted transactions. On
+The Dashboard analytics use persisted SQLite transactions. Its Month, Year, and
+Custom range filters control period income, expenses, savings, savings rate,
+and charts; current balance remains all-time income minus all-time expenses.
+Synthetic transactions are not automatically inserted into or mixed with user
+data. Use the Transactions navigation item to add, filter, edit, and delete
+persisted transactions. The Budgets page lets you set monthly expense-category
+limits, track utilization, and view warnings at 75%, 90%, and 100% usage.
+Dashboard budget totals cover the calendar months overlapping the selected
+date range and include spend only for categories with configured budgets. On
 startup, the app initializes the local schema and default categories.
 
 ## Configuration and local data
@@ -72,8 +79,8 @@ src/smartspend/             Installable Python package
   demo_data.py              Synthetic records for demos and tests
   db/                       SQLite connections, schema, errors, and records
   repositories/             Parameterized CRUD operations
-  services/                 Transaction validation and business rules
-  ui/                       Streamlit transaction-management interface
+  services/                 Transaction, analytics, and budget business rules
+  ui/                       Streamlit dashboard, transaction, and budget pages
 tests/                      Pytest fixtures and automated tests
 pyproject.toml              Package metadata, dependencies, and tool settings
 ```
@@ -83,6 +90,6 @@ pyproject.toml              Package metadata, dependencies, and tool settings
 1. Establish the project foundation, configuration, and test setup. (Complete)
 2. Add the SQLite schema, initialization, and repository layer. (Complete)
 3. Implement transaction management and validation. (Complete)
-4. Build dashboard summaries and budget management.
-5. Add analytics, forecasting, and downloadable reports.
+4. Build dashboard summaries and analytics. (Complete)
+5. Add forecasting and downloadable reports. (Budget management complete)
 6. Polish the interface, documentation, and test coverage.

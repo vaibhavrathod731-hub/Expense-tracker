@@ -135,6 +135,7 @@ def test_valid_amount_conversion_and_indian_formatting():
     assert rupees_to_paise("0.01") == 1
     assert format_paise_as_rupees(123_456_789) == "₹12,34,567.89"
     assert format_paise_as_rupees(10) == "₹0.10"
+    assert format_paise_as_rupees(-123_456_789) == "-₹12,34,567.89"
 
 
 @pytest.mark.parametrize(

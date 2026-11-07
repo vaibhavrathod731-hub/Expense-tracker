@@ -227,7 +227,8 @@ def categories_for_type(connection, transaction_type: str | None) -> list[Catego
 
 def format_paise_as_rupees(amount_paise: int) -> str:
     """Format integer paise as an Indian rupee value with two decimal places."""
-    rupees, paise = divmod(amount_paise, 100)
+    sign = "-" if amount_paise < 0 else ""
+    rupees, paise = divmod(abs(amount_paise), 100)
     number = str(rupees)
     if len(number) > 3:
         last_three = number[-3:]
@@ -237,4 +238,4 @@ def format_paise_as_rupees(amount_paise: int) -> str:
             groups.append(leading[-2:])
             leading = leading[:-2]
         number = ",".join(reversed(groups)) + "," + last_three
-    return f"₹{number}.{paise:02d}"
+    return f"{sign}₹{number}.{paise:02d}"
